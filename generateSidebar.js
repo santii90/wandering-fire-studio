@@ -4,6 +4,7 @@ const path = require('path');
 const DOCS_DIR = './docs';
 const IGNORE_FILES = ['index.html', '_sidebar.md', '_navbar.md'];
 
+// Recursivamente busca archivos .md
 function getMarkdownFiles(dir, basePath = '') {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   let results = [];
@@ -22,6 +23,7 @@ function getMarkdownFiles(dir, basePath = '') {
     }
   }
 
+  console.log("Archivos encontrados:", results);  // Verifica qué archivos se están encontrando
   return results.sort();
 }
 
@@ -52,15 +54,24 @@ function generateSidebarContent(files) {
     content += `${indent}- [${title}](${file.replace(/\\/g, '/')})\n`;
   }
 
+  console.log("Contenido del sidebar generado:\n", content);  // Verifica el contenido generado
   return content;
 }
 
 function writeSidebar(content) {
-  const sidebarPath = path.join(DOCS_DIR, '_sidebar.md');
-  fs.writeFileSync(sidebarPath, content);
-  console.log('✅ _sidebar.md generado con títulos de los documentos.');
+  const sidebarPath = path.join('_sidebar.md');
+  try {
+    fs.writeFileSync(sidebarPath, content);
+    console.log('✅ _sidebar.md generado con títulos de los documentos.');
+  } catch (error) {
+    console.error("Error al escribir _sidebar.md:", error);
+  }
 }
 
 const files = getMarkdownFiles(DOCS_DIR);
-const sidebar = generateSidebarContent(files);
-writeSidebar(sidebar);
+if (files.length > 0) {
+  const sidebar = generateSidebarContent(files);
+  writeSidebar(sidebar);
+} else {
+  console.log('No se encontraron archivos .md para generar el sidebar.');
+}
