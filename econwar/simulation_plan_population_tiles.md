@@ -101,3 +101,19 @@ Se propone un desarrollo iterativo:
     *   Usar threads si es apropiado.
 *   **Visualización:** Planificar cómo mostrar los cambios en `current_development` (cambio de sprite/tile gráfico) y potencialmente la `population_distribution` (iconos, tooltips).
 *   **Interacción con ResourceManager:** Definir si los recursos son puramente locales al tile o si existe un mercado/almacén regional/global gestionado por `ResourceManager` con el que los tiles interactúan.
+
+## 7. Sistema de Población Militar (Rediseño)
+
+Este sistema reemplaza la asignación directa de tropas y logística basada en porcentajes globales del antiguo `PopulationManager`.
+
+*   **Asignación Estratégica:** El jugador define dos parámetros globales (probablemente mediante sliders en la UI):
+   *   **% Asignación Militar:** Porcentaje de la *población total* del jugador que se desea dedicar al ejército. Esto determina una `target_military_population`.
+   *   **% Ratio Logístico:** Porcentaje del *personal militar actual* que se asignará a tareas de logística (`logistics_personnel`), el resto serán tropas de combate (`combat_troops`).
+*   **Contadores Globales:** Los valores `current_military_population`, `combat_troops` y `logistics_personnel` se almacenan globalmente por jugador (ej. en `GameState.resource_map` o un nuevo `MilitaryState`).
+*   **Reclutamiento/Desmovilización:**
+   *   Un proceso global (ej. en `GameTickManager` o un nuevo `MilitaryManager`) compara `current_military_population` con `target_military_population`.
+   *   Si hay déficit, se intentará reclutar nuevos efectivos hasta alcanzar el objetivo, limitado por una tasa de reclutamiento y la disponibilidad de población civil (preferentemente `PEASANT`).
+   *   El reclutamiento reduce la población civil (`PEASANT`) distribuida en los tiles del jugador. Se necesita un mecanismo para aplicar esta reducción (ej. proporcionalmente, o en tiles específicos con edificios militares).
+   *   Si hay excedente, el personal militar se desmoviliza gradualmente, volviendo a la población civil (ej. como `PEASANT` en tiles con capacidad).
+*   **Necesidades Militares:** El personal militar (`combat_troops` + `logistics_personnel`) consume recursos globales (ej. `FOOD`, `GOLD`) gestionados por `ResourceManager` (o un sistema dedicado).
+*   **Efecto Logístico:** El ratio de `logistics_personnel` afectará la eficiencia del ejército (ej. menor consumo de suministros, bonus de combate, velocidad de movimiento).
