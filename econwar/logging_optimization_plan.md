@@ -47,23 +47,26 @@ Basado en la revisión del código (`scripts/event_logger.gd`) y las llamadas a 
 ## Diagrama de Flujo (Propuesta)
 
 ```mermaid
-graph TD
-    subgraph Current Logging (High Frequency)
-        A[Population Unit Change] --> L(Log: population_growth)
-        B[Resource Fluctuation] --> L2(Log: resource_update)
-        C[Worker Reallocation] --> L3(Log: population_distribution_changed)
-        D[Expansion Step Success/Fail] --> L4(Log: expansion_success/failed)
-        E[Invalid UI Click] --> L5(Log: ui_expansion_invalid)
-        F[Info UI Click] --> L6(Log: ui_territory_info)
+flowchart TB
+    subgraph Current-Logging-High-Frequency
+        A[Population Unit Change] --> L[Log: population_growth]
+        B[Resource Fluctuation] --> L2[Log: resource_update]
+        C[Worker Reallocation] --> L3[Log: population_distribution_changed]
+        D[Expansion Step Success/Fail] --> L4[Log: expansion_success/failed]
+        E[Invalid UI Click] --> L5[Log: ui_expansion_invalid]
+        F[Info UI Click] --> L6[Log: ui_territory_info]
     end
-
-    subgraph Proposed Logging (Optimized)
-        G[Timer (e.g., 60s)] --> L_Opt1(Log Summary: population_total)
-        H[Resource Change + Cooldown] --> L_Opt2(Log Summary: resource_levels OR Log: resource_update (debounced))
-        I[Worker Reallocation + Cooldown] --> L_Opt3(Log: population_distribution_changed (debounced))
-        J[Expansion End] --> L_Opt4(Log Summary: expansion_completed)
-        K[Invalid UI Click] --> R1(REMOVE / SAMPLE Log)
-        L[Info UI Click] --> R2(REMOVE Log)
+    
+    %% Relación explícita entre subgraphs para forzar orden vertical
+    Current-Logging-High-Frequency --> Proposed-Logging-Optimized 
+    
+    subgraph Proposed-Logging-Optimized
+        G[Timer] --> L_Opt1[Log Summary: population_total]
+        H[Resource Change + Cooldown] --> L_Opt2[Log Summary: resource_levels OR Log: resource_update - debounced]
+        I[Worker Reallocation + Cooldown] --> L_Opt3[Log: population_distribution_changed - debounced]
+        J[Expansion End] --> L_Opt4[Log Summary: expansion_completed]
+        K[Invalid UI Click] --> R1[REMOVE / SAMPLE Log]
+        L[Info UI Click] --> R2[REMOVE Log]
     end
 
     style L fill:#f9f,stroke:#333,stroke-width:2px
@@ -79,7 +82,6 @@ graph TD
     style L_Opt4 fill:#9cf,stroke:#333,stroke-width:2px
     style R1 fill:#ccc,stroke:#333,stroke-width:2px
     style R2 fill:#ccc,stroke:#333,stroke-width:2px
-
 ```
 
 ## Nota Importante

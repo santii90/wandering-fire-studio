@@ -52,16 +52,13 @@ La simulación principal iterará sobre cada tile controlado, ejecutando las sig
 
 ```mermaid
 graph TD
-    Start[Inicio Ciclo Tile] --> ProdCon{1. Producción y Consumo};
-    ProdCon --> Metrics{2. Actualizar Métricas de Clase};
-    Metrics --> PopChange{3. Crecimiento/Decrecimiento Poblacional};
-    PopChange --> DevChange{4. Evaluar/Aplicar Cambio Desarrollo Tile};
-    DevChange --> ClassTrans{5. Evaluar/Aplicar Transición de Clase Interna};
-    ClassTrans --> Migration(6. Evaluar/Aplicar Migración (Futuro));
-    Migration --> End[Fin Ciclo Tile];
-
-    style Start fill:#lightgrey,stroke:#333,stroke-width:2px
-    style End fill:#lightgrey,stroke:#333,stroke-width:2px
+    Start[Inicio Ciclo Tile] --> ProdCon[1. Producción y Consumo]
+    ProdCon --> Metrics[2. Actualizar Métricas de Clase]
+    Metrics --> PopChange[3. Crecimiento/Decrecimiento Poblacional]
+    PopChange --> DevChange[4. Evaluar/Aplicar Cambio Desarrollo Tile]
+    DevChange --> ClassTrans[5. Evaluar/Aplicar Transición de Clase Interna]
+    ClassTrans --> Migration[6. Evaluar/Aplicar Migración Futuro]
+    Migration --> End[Fin Ciclo Tile]
 ```
 
 1.  **Producción y Consumo:** Las clases en el tile producen recursos según su rol y la eficiencia del `current_development`. Intentan consumir los recursos definidos en `CLASS_NEEDS`.
