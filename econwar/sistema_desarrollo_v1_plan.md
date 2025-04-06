@@ -165,4 +165,4 @@ func try_expand_city(city_x, city_y):
 2. **Fase 2**: Expansión de ciudades
 3. **Fase 3**: Bonificaciones por nivel
 4. **Fase 4**: Requisitos para aumentar nivel
-5. **Fase 5**: UI y efectos visuales 
+5. **Fase 5**: UI y efectos visuales
