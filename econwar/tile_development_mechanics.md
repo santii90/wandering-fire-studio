@@ -1,6 +1,6 @@
 ---
-date: 2025-04-05T23:50:52
-order: 997000
+date: 2025-04-07T17:27:21
+order: 999000
 ---
 # Mecánicas Actuales de Desarrollo de Casillas (Tiles)
 

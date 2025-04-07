@@ -1,6 +1,6 @@
 ---
-date: 2025-04-06T20:23:49
-order: 999000
+date: 2025-04-07T17:27:21
+order: 995000
 ---
 # Plan de Refactorización: Sistema Militar y Seguimiento de Ubicación (v2)
 
