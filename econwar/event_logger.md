@@ -1,5 +1,6 @@
 ---
 date: 2025-04-01T16:38:12
+order: 986000
 ---
 # Event Logger System for Godot 4 Strategy Game
 

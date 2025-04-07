@@ -1,5 +1,6 @@
 ---
 date: 2025-04-05T13:14:18
+order: 994000
 ---
 # Plan de Refactorización Detallado para `main.gd`
 

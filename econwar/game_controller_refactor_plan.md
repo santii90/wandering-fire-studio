@@ -1,5 +1,6 @@
 ---
 date: 2025-04-04T15:52:17
+order: 992000
 ---
 # Plan de Refactorización de `game_controller.gd`
 

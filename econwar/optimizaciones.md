@@ -1,5 +1,6 @@
 ---
 date: 2025-04-03T12:58:33
+order: 988000
 ---
 # Optimizaciones de Rendimiento en EconWar
 

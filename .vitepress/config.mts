@@ -20,7 +20,8 @@ export default withMermaid({
 
     sidebar: generateSidebar({
       useTitleFromFileHeading: true,
-      sortMenusByFrontmatterDate: true,
+      sortMenusByFrontmatterOrder: true,  // Cambiar a order en lugar de date
+      sortMenusOrderByDescending: true,  // Mantener el orden descendente
     }),
 
     mermaid: {

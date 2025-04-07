@@ -1,5 +1,6 @@
 ---
 date: 2025-04-04T15:52:17
+order: 993000
 ---
 # Plan Revisado: Lógica de Ticks y Tiempo Real
 

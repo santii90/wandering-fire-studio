@@ -1,5 +1,6 @@
 ---
 date: 2025-04-05T13:14:18
+order: 995000
 ---
 # Plan de Corrección para Problemas de UI Post-Refactorización
 

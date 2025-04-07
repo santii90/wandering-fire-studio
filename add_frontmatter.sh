@@ -1,40 +1,47 @@
 #!/bin/bash
 
-# Añadir frontmatter con fecha y hora a los archivos .md existentes en econwar
+# Actualizar frontmatter usando el campo 'order' con valores escalonados
 
-for archivo in ./econwar/*.md; do
+# Crear un array con los nombres de archivo ordenados por fecha de modificación
+archivos_ordenados=($(ls -t ./econwar/*.md))
+
+# Valor base para el order (empezar con un valor grande y decrementar)
+order_value=1000000
+
+for archivo in "${archivos_ordenados[@]}"; do
     nombre_archivo=$(basename "$archivo")
-    # Usar formato ISO para la fecha que incluye hora
-    fecha_modificacion=$(date -r "$archivo" +"%Y-%m-%dT%H:%M:%S")
     
     echo "Procesando $nombre_archivo..."
     
     # Crear archivo temporal
     TEMP_FILE=$(mktemp)
     
-    # Verificar si el archivo ya tiene frontmatter
-    if head -n 3 "$archivo" | grep -q "^---"; then
-        # Ya tiene frontmatter, actualiza o añade el campo date
-        awk -v fecha="$fecha_modificacion" '
-        BEGIN { in_frontmatter = 0; date_updated = 0; }
-        /^---/ && !in_frontmatter { in_frontmatter = 1; print; next; }
-        /^---/ && in_frontmatter { in_frontmatter = 0; if (!date_updated) { print "date: " fecha; }; print; next; }
-        /^date:/ && in_frontmatter { print "date: " fecha; date_updated = 1; next; }
-        in_frontmatter && !date_updated && /^[a-zA-Z]/ { print $0; if (!date_updated) { print "date: " fecha; date_updated = 1; } next; }
-        { print; }
-        ' "$archivo" > "$TEMP_FILE"
-    else
-        # No tiene frontmatter, crea uno nuevo
-        echo "---" > "$TEMP_FILE"
-        echo "date: $fecha_modificacion" >> "$TEMP_FILE"
-        echo "---" >> "$TEMP_FILE"
-        cat "$archivo" >> "$TEMP_FILE"
-    fi
+    # Extraer el contenido omitiendo el frontmatter existente
+    awk '
+    BEGIN { in_frontmatter = 0; skip = 0; }
+    /^---/ && !in_frontmatter { in_frontmatter = 1; skip = 1; next; }
+    /^---/ && in_frontmatter { in_frontmatter = 0; skip = 0; next; }
+    !skip { print; }
+    ' "$archivo" > "$TEMP_FILE.content"
+    
+    # Obtener fecha real de modificación para el campo date
+    fecha_modificacion=$(date -r "$archivo" +"%Y-%m-%d")
+    
+    # Crear nuevo archivo con frontmatter actualizado
+    echo "---" > "$TEMP_FILE"
+    echo "date: $fecha_modificacion" >> "$TEMP_FILE"
+    echo "order: $order_value" >> "$TEMP_FILE"
+    echo "---" >> "$TEMP_FILE"
+    cat "$TEMP_FILE.content" >> "$TEMP_FILE"
     
     # Reemplazar el archivo original
     mv "$TEMP_FILE" "$archivo"
+    rm -f "$TEMP_FILE.content"
     
-    echo "Actualizado $nombre_archivo con fecha: $fecha_modificacion"
+    echo "Actualizado $nombre_archivo con order: $order_value"
+    
+    # Decrementar el valor de order para el siguiente archivo
+    order_value=$((order_value - 1000))
 done
 
 echo "Actualización de frontmatter completada."

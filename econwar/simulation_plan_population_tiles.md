@@ -1,5 +1,6 @@
 ---
 date: 2025-04-05T16:20:27
+order: 996000
 ---
 # Plan de Simulación: Población Estratificada y Desarrollo Emergente de Tiles
 
