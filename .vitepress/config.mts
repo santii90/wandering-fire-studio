@@ -20,8 +20,13 @@ export default withMermaid({
 
     sidebar: generateSidebar({
       useTitleFromFileHeading: true,
-      sortMenusByFrontmatterOrder: true,  // Cambiar a order en lugar de date
-      sortMenusOrderByDescending: true,  // Mantener el orden descendente
+      sortMenusByFrontmatterDate: true,
+      sortMenusOrderByDescending: true,
+      debugPrint: true,
+      useTitleFromFrontmatter: true,  // Por si hay títulos en frontmatter
+      frontmatterTitleFieldName: 'title',
+      rootGroupText: 'Documentación', // Texto para el grupo raíz
+      documentRootPath: '/'
     }),
 
     mermaid: {
