@@ -1,3 +1,6 @@
+---
+date: 2025-04-03T12:58:33
+---
 # Optimizaciones de Rendimiento en EconWar
 
 ## Problema Original

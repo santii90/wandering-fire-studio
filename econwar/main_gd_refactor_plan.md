@@ -1,3 +1,6 @@
+---
+date: 2025-04-05T13:14:18
+---
 # Plan de Refactorización Detallado para `main.gd`
 
 ## 1. Introducción

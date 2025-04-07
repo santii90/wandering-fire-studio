@@ -1,3 +1,6 @@
+---
+date: 2025-04-04T11:22:48
+---
 # Plan de Implementación: Panel de Diplomacia
 
 **Objetivo:** Implementar el panel de Diplomacia en la UI inferior para mostrar el estado de las relaciones entre el jugador actual y las demás facciones (IA o jugadores).

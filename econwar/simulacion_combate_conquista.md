@@ -1,3 +1,6 @@
+---
+date: 2025-04-01T19:48:50
+---
 # Sistema de Simulación de Combate y Conquista
 
 ## Descripción General

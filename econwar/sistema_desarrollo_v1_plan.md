@@ -1,3 +1,6 @@
+---
+date: 2025-04-05T23:51:43
+---
 # Sistema de Desarrollo de Territorios
 
 Este documento describe el sistema de desarrollo planificado para el juego, que permitirá una evolución más realista de los territorios a lo largo del tiempo.

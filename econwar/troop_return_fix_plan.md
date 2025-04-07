@@ -1,3 +1,6 @@
+---
+date: 2025-04-07T02:48:03
+---
 # Plan para Corregir Cálculo de Tropas Post-Misión
 
 ## 1. Objetivo

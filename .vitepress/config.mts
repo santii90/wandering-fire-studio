@@ -7,6 +7,10 @@ export default withMermaid({
   title: "Wandering Fire Studio",
   description: "Trying to make games.",
   base: '/wandering-fire-studio/', // Base URL for GitHub Pages
+
+  // Configuración para mostrar última actualización
+  lastUpdated: true,
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -29,6 +33,9 @@ export default withMermaid({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
+    ],
+
+    // Configuración para personalizar el texto de última actualización
+    lastUpdatedText: "Última actualización"
   }
 })

@@ -1,3 +1,6 @@
+---
+date: 2025-04-05T23:50:52
+---
 # Mecánicas Actuales de Desarrollo de Casillas (Tiles)
 
 Este documento describe el sistema de desarrollo de casillas implementado actualmente en el juego, basado en estados discretos y transiciones según las condiciones de población. Este sistema reemplaza o precede al plan basado en niveles numéricos descrito en `sistema_desarrollo_v1_plan.md`.

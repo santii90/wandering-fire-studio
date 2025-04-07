@@ -1,3 +1,6 @@
+---
+date: 2025-04-04T15:52:17
+---
 # Plan Revisado: Lógica de Ticks y Tiempo Real
 
 Este documento describe la arquitectura propuesta para separar la lógica basada en ticks de la lógica en tiempo real, introduciendo un segundo tick para las acciones militares.

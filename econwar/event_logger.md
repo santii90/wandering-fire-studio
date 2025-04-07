@@ -1,3 +1,6 @@
+---
+date: 2025-04-01T16:38:12
+---
 # Event Logger System for Godot 4 Strategy Game
 
 ## Overview
